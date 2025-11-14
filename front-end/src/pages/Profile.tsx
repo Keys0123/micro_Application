@@ -9,15 +9,14 @@ import clip4 from "../assets/clip-04.jpg";
 import profile from "../assets/profile.jpg";
 import profileg from "../assets/profileGirl.jpg";
 import { useState, useEffect, Fragment } from "react";
+import { USER_URL } from "../config";
 function Profile() {
-
-
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<any>({});
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:3001/users/", {
+      fetch(`${USER_URL}/users/`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +36,6 @@ function Profile() {
     }
   }, []);
 
-
   // var image = profile;
   // if (data.gender === "female") {
   //   image = profileg;
@@ -55,13 +53,20 @@ function Profile() {
                     <div className="row">
                       <div className="col-lg-4">
                         {/* Render user profile image here */}
-                        <img src={user.gender === "female" ? profileg : profile} alt="Profile Image" />
+                        <img
+                          src={user.gender === "female" ? profileg : profile}
+                          alt="Profile Image"
+                        />
                       </div>
                       <div className="col-lg-4 align-self-center">
                         <div className="main-info header-text">
                           <h1 id="firstname">{user.firstName}</h1>
                           <h5 id="lastname">{user.lastName}</h5>
-                          <p>"I'm {user.firstName}, a passionate gamer who loves exploring new worlds and conquering challenges. Let's conquer the gaming world together!"</p>
+                          <p>
+                            "I'm {user.firstName}, a passionate gamer who loves
+                            exploring new worlds and conquering challenges.
+                            Let's conquer the gaming world together!"
+                          </p>
                           <div className="main-border-button">
                             <a href="#">Update</a>
                           </div>

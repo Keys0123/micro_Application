@@ -1,23 +1,22 @@
 import { Fragment, useState } from "react";
 import "../Style/Login.css";
 import Alert from "../component/Alert";
+import { USER_URL } from "../config";
 function Login() {
-
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    
+
     try {
-      const response = await fetch("http://localhost:3001/users/login", {
+      const response = await fetch(`${USER_URL}/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
       });
-  
+
       if (response.ok) {
         console.log("Login successful");
         // window.location.href = "/";
@@ -35,8 +34,6 @@ function Login() {
     } catch (error) {
       console.error("Error:", error);
     }
-
-
   }
   return (
     <Fragment>

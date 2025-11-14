@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: siddhartha54/frontend-service:v9
+          image: siddhartha54/frontend-micro:v1
           ports:
             - containerPort: 5173
           env:
@@ -23,18 +23,5 @@ spec:
               value: "http://product-service:9000"
             - name: REACT_APP_CART_SERVICE_URL
               value: "http://cart-service:9100"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-service
-  namespace: micro-app
-spec:
-  selector:
-    app: frontend
-  ports:
-    - protocol: TCP
-      port: 5173
-      targetPort: 5173   
-      nodePort: 32035
-  type: NodePort
+            - name: REACT_APP_USER_SERVICE_URL
+              value: "http://user-service:9001"

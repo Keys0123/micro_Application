@@ -1,3 +1,4 @@
+import { USER_URL } from "../config";
 import "../Style/Register.css";
 import { useState } from "react";
 function Register() {
@@ -14,14 +15,22 @@ function Register() {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3001/users", {
+      const response = await fetch(`${USER_URL}/users`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password, firstName, lastName, age, phone, gender })
+        body: JSON.stringify({
+          email,
+          password,
+          firstName,
+          lastName,
+          age,
+          phone,
+          gender,
+        }),
       });
-  
+
       if (response.ok) {
         console.log("Registered successful");
         window.location.href = "/";
@@ -40,7 +49,7 @@ function Register() {
         lastName,
         age,
         phone,
-        gender
+        gender,
       };
       const dataString = JSON.stringify(data);
       window.location.href = "/login";
@@ -52,7 +61,11 @@ function Register() {
     <div className="bg-img">
       <div className="registerContent">
         <header>Register Form</header>
-        <form action="http://localhost:3001/users" method="post" onSubmit={handleSubmit}>
+        <form
+          action={`${USER_URL}/users`}
+          method="post"
+          onSubmit={handleSubmit}
+        >
           <div className="row">
             <div className="col">
               <h6>First name</h6>
