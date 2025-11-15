@@ -19,9 +19,9 @@ jobs:
         id: tag
         shell: bash
         run: |
-          # generate a random number between 1 and 100 and export as GITHUB output
+          # generate a random number between 1 and 100 and export as GitHub step output
           NUM=$(( (RANDOM % 100) + 1 ))
-          echo "TAG=v$NUM" >> $GITHUB_OUTPUT
+          echo "TAG=v$NUM" >> "$GITHUB_OUTPUT"
 
       - name: Show Generated Tag
         run: echo "Generated Tag: ${{ steps.tag.outputs.TAG }}"
