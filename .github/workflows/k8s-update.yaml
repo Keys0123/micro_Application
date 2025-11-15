@@ -20,17 +20,18 @@ jobs:
 
       - name: Get latest Docker tags
         run: |
-          export FRONTEND_TAG=latest
-          export CART_TAG=latest
-          export PRODUCT_TAG=latest
-          export USER_TAG=latest
+          echo "FRONTEND_TAG=latest" >> $GITHUB_ENV
+          echo "CART_TAG=latest" >> $GITHUB_ENV
+          echo "PRODUCT_TAG=latest" >> $GITHUB_ENV
+          echo "USER_TAG=latest" >> $GITHUB_ENV
 
       - name: Update Kubernetes manifests
+        working-directory: ./k8s
         run: |
-          sed -i -E "s|(siddhartha54/cart-service:).*|\1${CART_TAG}|" k8s/cart-deployment.yaml
-          sed -i -E "s|(siddhartha54/product-service:).*|\1${PRODUCT_TAG}|" k8s/product-deployment.yaml
-          sed -i -E "s|(siddhartha54/user-service:).*|\1${USER_TAG}|" k8s/user-deployment.yaml
-          sed -i -E "s|(siddhartha54/frontend-service:).*|\1${FRONTEND_TAG}|" k8s/frontend-deployment.yaml
+          sed -i -E "s|(siddhartha54/cart-service:).*|\1${CART_TAG}|" cart-deployment.yaml
+          sed -i -E "s|(siddhartha54/product-service:).*|\1${PRODUCT_TAG}|" product-deployment.yaml
+          sed -i -E "s|(siddhartha54/user-service:).*|\1${USER_TAG}|" user-deployment.yaml
+          sed -i -E "s|(siddhartha54/frontend-service:).*|\1${FRONTEND_TAG}|" frontend-deployment.yaml
 
       - name: Configure Git
         run: |
