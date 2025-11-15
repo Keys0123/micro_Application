@@ -18,9 +18,7 @@ jobs:
 
       - name: Generate Image Tag
         id: tag
-        run: |
-          RANDOM_TAG=$(( RANDOM % 90 + 10 ))
-          echo "TAG=v$RANDOM_TAG" >> $GITHUB_OUTPUT
+        run: echo "TAG=v$((RANDOM % 90 + 10))" >> $GITHUB_OUTPUT
 
       - name: Show Generated Tag
         run: echo "Using tag: ${{ steps.tag.outputs.TAG }}"
