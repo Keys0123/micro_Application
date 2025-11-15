@@ -1,4 +1,4 @@
-name: Build & Push Docker Image
+name: Build & Push Docker Images
 
 on:
   push:
@@ -15,9 +15,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Generate Random Tag v{1-100}
+      - name: Generate Random Tag
         id: tag
-        run: echo "TAG=v$((1 + RANDOM % 100))" >> $GITHUB_OUTPUT
+        run: echo "TAG=v$(( (RANDOM % 100) + 1 ))" >> $GITHUB_OUTPUT
+        shell: bash
 
       - name: Show Generated Tag
         run: echo "Generated Tag: ${{ steps.tag.outputs.TAG }}"
