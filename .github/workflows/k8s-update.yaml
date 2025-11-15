@@ -6,9 +6,6 @@ on:
     types:
       - completed
 
-  push:
-    branches: ["main"]
-
 env:
   GITHUB_REPO: https://github.com/sidhdhakal/micro_Application.git
   GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
@@ -17,37 +14,31 @@ env:
 jobs:
   update-manifests:
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Verify Docker tags
-      - name: Verify Docker Tags
+      - name: Get latest Docker tags
         run: |
-          echo "Frontend_DOCKER_TAG: ${{ github.event.inputs.Frontend_DOCKER_TAG }}"
-          echo "Cart_DOCKER_TAG: ${{ github.event.inputs.Cart_DOCKER_TAG }}"
-          echo "Product_DOCKER_TAG: ${{ github.event.inputs.Product_DOCKER_TAG }}"
-          echo "User_DOCKER_TAG: ${{ github.event.inputs.User_DOCKER_TAG }}"
+          export FRONTEND_TAG=latest
+          export CART_TAG=latest
+          export PRODUCT_TAG=latest
+          export USER_TAG=latest
 
-      # Update Kubernetes manifests
       - name: Update Kubernetes manifests
         run: |
-          sed -i -E "s|(siddhartha54/cart-service:).*|\1${{ github.event.inputs.Cart_DOCKER_TAG }}|" k8s/cart-deployment.yaml
-          sed -i -E "s|(siddhartha54/product-service:).*|\1${{ github.event.inputs.Product_DOCKER_TAG }}|" k8s/product-deployment.yaml
-          sed -i -E "s|(siddhartha54/user-service:).*|\1${{ github.event.inputs.User_DOCKER_TAG }}|" k8s/user-deployment.yaml
-          sed -i -E "s|(siddhartha54/frontend-service:).*|\1${{ github.event.inputs.Frontend_DOCKER_TAG }}|" k8s/frontend-deployment.yaml
+          sed -i -E "s|(siddhartha54/cart-service:).*|\1${CART_TAG}|" k8s/cart-deployment.yaml
+          sed -i -E "s|(siddhartha54/product-service:).*|\1${PRODUCT_TAG}|" k8s/product-deployment.yaml
+          sed -i -E "s|(siddhartha54/user-service:).*|\1${USER_TAG}|" k8s/user-deployment.yaml
+          sed -i -E "s|(siddhartha54/frontend-service:).*|\1${FRONTEND_TAG}|" k8s/frontend-deployment.yaml
 
-      # Configure Git for pushing back
       - name: Configure Git
         run: |
           git config --global user.name "${GIT_USERNAME}"
           git config --global user.email "actions@github.com"
 
-      # Commit & push changes
       - name: Commit and Push changes
         run: |
           git add k8s/*.yaml
-          git commit -m "Updated environment variables / Docker tags" || echo "No changes to commit"
+          git commit -m "Updated Docker tags to latest" || echo "No changes to commit"
           git push https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/sidhdhakal/micro_Application.git main
