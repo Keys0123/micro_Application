@@ -17,8 +17,11 @@ jobs:
 
       - name: Generate Random Tag
         id: tag
-        run: echo "TAG=v$(( (RANDOM % 100) + 1 ))" >> $GITHUB_OUTPUT
         shell: bash
+        run: |
+          # generate a random number between 1 and 100 and export as GITHUB output
+          NUM=$(( (RANDOM % 100) + 1 ))
+          echo "TAG=v$NUM" >> $GITHUB_OUTPUT
 
       - name: Show Generated Tag
         run: echo "Generated Tag: ${{ steps.tag.outputs.TAG }}"
@@ -27,7 +30,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
-          password: $${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build & Push Frontend
         uses: docker/build-push-action@v5
