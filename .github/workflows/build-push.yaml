@@ -18,9 +18,8 @@ jobs:
       - name: Generate Image Tag
         id: tag
         run: |
-        RANDOM_TAG=$(( RANDOM % 90 + 10 ))
-        echo "TAG=$RANDOM_TAG" >> $GITHUB_OUTPUT
-
+          RANDOM_TAG=$(( RANDOM % 90 + 10 ))
+          echo "TAG=$RANDOM_TAG" >> $GITHUB_OUTPUT
 
       - name: Show Generated Tag
         run: echo "Using tag: ${{ steps.tag.outputs.TAG }}"
@@ -31,33 +30,33 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Build & Push frontend-service
       - name: Build & Push frontend-service
         uses: docker/build-push-action@v5
         with:
           context: ./front-end
           push: true
           tags: ${{ env.DOCKERHUB_USER }}/frontend-service:${{ steps.tag.outputs.TAG }}
-      # Build & Push cart-service
+
       - name: Build & Push cart-service
         uses: docker/build-push-action@v5
         with:
           context: ./Cart
           push: true
           tags: ${{ env.DOCKERHUB_USER }}/cart-service:${{ steps.tag.outputs.TAG }}
-      # Build & Push product-service
+
       - name: Build & Push product-service
         uses: docker/build-push-action@v5
         with:
           context: ./Product
           push: true
           tags: ${{ env.DOCKERHUB_USER }}/product-service:${{ steps.tag.outputs.TAG }}
-      # Build & Push user-service
+
       - name: Build & Push user-service
         uses: docker/build-push-action@v5
         with:
           context: ./User
           push: true
           tags: ${{ env.DOCKERHUB_USER }}/user-service:${{ steps.tag.outputs.TAG }}
+
       - name: Print Final Tag
         run: echo "All images pushed with tag: ${{ steps.tag.outputs.TAG }}"
