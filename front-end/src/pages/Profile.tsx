@@ -63,9 +63,10 @@ function Profile() {
                           <h1 id="firstname">{user.firstName}</h1>
                           <h5 id="lastname">{user.lastName}</h5>
                           <p>
-                            "I'm {user.firstName}, a passionate gamer who loves
-                            exploring new worlds and conquering challenges.
-                            Let's conquer the gaming world together!"
+                            "I'm {user.firstName}, a passionate gamersss who
+                            loves exploring new worlds and conquering
+                            challenges. Let's conquer the gaming world
+                            together!"
                           </p>
                           <div className="main-border-button">
                             <a href="#">Update</a>
