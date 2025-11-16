@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: user
-          image: siddhartha54/user-service:v9
+          image: siddhartha54/user-service:latest
           ports:
             - containerPort: 9001
           env:
