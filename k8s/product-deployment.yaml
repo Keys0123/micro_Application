@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: product
-          image: siddhartha54/product-service:latest
+          image: siddhartha54/product-service:v9
           ports:
             - containerPort: 9000
           env:
