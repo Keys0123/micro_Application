@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: siddhartha54/frontend-service:latest
+          image: umes122/frontend:latest
           ports:
             - containerPort: 5173
           env:

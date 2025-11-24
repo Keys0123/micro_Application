@@ -1,4 +1,4 @@
-# Stage 1: Build (optional if you have build steps)
+# Stage 0: Build (optional if you have build steps)
 FROM node:20-alpine AS build
 
 WORKDIR /app
