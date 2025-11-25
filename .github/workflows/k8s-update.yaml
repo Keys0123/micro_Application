@@ -42,4 +42,4 @@ jobs:
         run: |
           git add k8s/*.yaml
           git commit -m "Updated Docker tags to latest" || echo "No changes to commit"
-          git push https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/sidhdhakal/micro_Application.git main
+          git push https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/Keys0123/micro_Application.git main
