@@ -8,6 +8,7 @@ interface Props {
 }
 
 const Card = ({ name, price, imgsrc, category }: Props) => {
+  
   return (
     <div className="item">
       <img src={imgsrc} alt="" />
@@ -23,3 +24,4 @@ const Card = ({ name, price, imgsrc, category }: Props) => {
 };
 
 export default Card;
+
