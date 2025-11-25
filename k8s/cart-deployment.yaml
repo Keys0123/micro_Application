@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: cart
-          image: umes122/cart-service:latest
+          image: umes122/cart-service:1
           ports:
             - containerPort: 9003
           env:

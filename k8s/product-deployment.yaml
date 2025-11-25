@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: product
-          image: umes122/product-service:latest
+          image: umes122/product-service:1
           ports:
             - containerPort: 9000
           env:
