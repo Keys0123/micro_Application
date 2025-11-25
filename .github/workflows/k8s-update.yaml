@@ -7,7 +7,7 @@ on:
       - completed
 
 env:
-  GITHUB_REPO: https://github.com/sidhdhakal/micro_Application.git
+  GITHUB_REPO: https://github.com/Keys0123/micro_Application.git
   GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
   GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
 
