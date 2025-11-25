@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: user
-          image: umes122/user-service:1
+          image: umes122/user-service:latest
           ports:
             - containerPort: 9001
           env:
